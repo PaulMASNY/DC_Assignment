@@ -18,11 +18,20 @@ The collected data come from an experiment conducted with a group of 30 voluntee
 an age bracket of 19-48 years. Each person performed six activities :
 (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a 
 smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and 
-gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity 
+gyroscope, they captured 3-axial linear acceleration and 3-axial angular velocity 
 at a constant rate of 50Hz. 
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise 
+filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap 
+(128 readings/window). The sensor acceleration signal, which has gravitational and body 
+motion components, was separated using a Butterworth low-pass filter into body 
+acceleration and gravity. The gravitational force is assumed to have only low frequency 
+components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, 
+a vector of features was obtained by calculating variables from the time 
+and frequency domain.
+
 The experiments have been video-recorded to label the data manually. 
 
-**Any other details on data collection can be found here :**
+**Any other details on data collection and units can be found here :**
 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
@@ -79,7 +88,8 @@ number of participants.
 Every other relevant information can be found in following data folder files :
 "features_info.txt" and "features.txt" .
 
-Accordingly to the study design requirements, only these variables are selected from original data:
+Accordingly to the transformation requirements, only these variables are selected from 
+original data and contain means and standard variations for performed signal measures(Hz):
 
 * "3","tBodyAcc-mean()-X" 
 * "4","tBodyAcc-mean()-Y"
@@ -171,6 +181,9 @@ DITEN - Università degli Studi di Genova, Genoa (I-16145), Italy.
 2 - CETpD - Technical Research Centre for Dependency Care and Autonomous Living
 Universitat Politècnica de Catalunya (BarcelonaTech). Vilanova i la Geltrú (08800), Spain
 activityrecognition '@' smartlab.ws 
+
+
+
 
 
 
