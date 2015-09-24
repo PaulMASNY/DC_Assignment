@@ -57,9 +57,11 @@ If a version 1.9.4 or below is displayed, then install the last version before y
 4. THE OUTCOME :
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
+>**An intermediate data frame is generated and named "ReducedDataSet.csv". It contains the
+   selected variables before the calculation of the mean for each participant and activity.
 
->**The resulting dataframe should contain 180 records an is written to the working directory as
-  a "FinalDataSet.csv" file.**
+>**The resulting dataframe should contain 180 records and 81 variables and is written to
+   the working directory as a "FinalDataSet.csv" file.**
 
 
 
