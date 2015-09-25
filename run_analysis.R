@@ -76,14 +76,12 @@ ReducedDataSet<-Reduced
 write.csv(ReducedDataSet, " ReducedDataSet.csv" )
 
 ####### Apply means and sort ordered dataset :
+
 N<-ReducedDataSet2[,lapply(.SD,mean),by="Activity,Subject"]
 FinalDataSet<-N[order(Activity,Subject)]
 
 ###### Replace Activity codes with descriptive activity names:
 
-Descriptive<-c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
-Activity<-c(1:6)
-toMerge<-data.table(Activity,Descriptive)
 Final<- merge(toMerge,FinalDataSet,by="Activity")
 Final[,"Activity"]<-NULL
 colnames(Final)[1] <- "Activity"
