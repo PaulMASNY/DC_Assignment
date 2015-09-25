@@ -1,6 +1,7 @@
 
 #########################################################################################
 # IMPORTANT :
+#########################################################################################
 # Please ensure you have the latest data.table package installed,
 # as the 1.9.4 or any lower version does contain a bug which causes buffer
 # overflow, ( ... a mismatch between variable declaration and it's memory space allocated)
@@ -28,6 +29,7 @@ packageVersion('data.table')
 
 ######## 1st File load :
 
+options(warn=-1)
 Headers<-fread("features.txt")
 HeaderMerge<-Headers[,V2]
 Amerge<-fread("X_test.txt")
@@ -57,14 +59,42 @@ colnames(Merged)<-HeaderMerge2
 a<-c(1,2,grep("mean",HeaderMerge2),grep("std",HeaderMerge2))
 HMA<-HeaderMerge2 [a]
 ReducedDataSet<-subset(Merged,select=HMA)
+ReducedDataSet2<-ReducedDataSet
+
+###### Replace Activity codes with descriptive activity names:
+
+Descriptive<-c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
+Activity<-c(1:6)
+toMerge<-data.table(Activity,Descriptive)
+Reduced<- merge(toMerge,ReducedDataSet,by="Activity")
+Reduced[,"Activity"]<-NULL
+colnames(Reduced)[1] <- "Activity"
+ReducedDataSet<-Reduced
+
+##### Write reduced data file :
+
 write.csv(ReducedDataSet, " ReducedDataSet.csv" )
 
 ####### Apply means and sort ordered dataset :
-N<-ReducedDataSet[,lapply(.SD,mean),by="Activity,Subject"]
+N<-ReducedDataSet2[,lapply(.SD,mean),by="Activity,Subject"]
 FinalDataSet<-N[order(Activity,Subject)]
+
+###### Replace Activity codes with descriptive activity names:
+
+Descriptive<-c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
+Activity<-c(1:6)
+toMerge<-data.table(Activity,Descriptive)
+Final<- merge(toMerge,FinalDataSet,by="Activity")
+Final[,"Activity"]<-NULL
+colnames(Final)[1] <- "Activity"
+FinalDataSet<-Final
+
+####### Write file and check dimensions :
+
 write.csv(FinalDataSet, "FinalDataSet.csv")
 dim(ReducedDataSet)
 dim(FinalDataSet)
+
 
 
 
